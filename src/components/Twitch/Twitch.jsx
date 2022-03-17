@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { TwitchEmbed, TwitchChat, TwitchClip, TwitchPlayer } from 'react-twitch-embed';
+import { TwitchEmbed } from 'react-twitch-embed';
 import styled from 'styled-components';
 
 const StreamVid = styled.div`
