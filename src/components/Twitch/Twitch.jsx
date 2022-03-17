@@ -3,10 +3,9 @@ import React from 'react';
 import { TwitchEmbed, TwitchChat, TwitchClip, TwitchPlayer } from 'react-twitch-embed';
 import styled from 'styled-components';
 
-// const StreamVid = styled.div`
-//   height: 255px;
-//   width: 450px;
-// `;
+const StreamVid = styled.div`
+  grid-column: 1 / 4;
+`;
 
 // const StreamChat = styled.div`
 //   height: 255px;
@@ -15,13 +14,17 @@ import styled from 'styled-components';
 
 const Twitch = () => {
   return (
-    <TwitchEmbed
-      channel="LIRIK"
-      id="LIRIK"
-      theme="dark"
-      muted
-      onVideoPause={() => console.log(':(')}
-    />
+    <StreamVid>
+      <TwitchEmbed
+        channel="LIRIK"
+        id="LIRIK"
+        theme="dark"
+        muted
+        onVideoPause={() => console.log(':(')}
+        width="100%"
+        height="392%"
+      />
+    </StreamVid>
   );
 }
 

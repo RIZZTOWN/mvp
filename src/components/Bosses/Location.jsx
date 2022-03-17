@@ -3,8 +3,30 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 
+
+const BossWrapper = styled.div`
+  grid-column: 1 / 4;
+  grid-row: 7 / 10;
+  background-image: url('https://cdn.vox-cdn.com/thumbor/rzgLd2ZUzQitq-jQlmBkUuTP4cg=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22652456/potboys.jpg');
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  h1 {
+    color: rgba(207, 207, 207, 0.726);
+  }
+  .map-label {
+    color: rgba(207, 207, 207, 0.726);
+    margin: 10px;
+  }
+`;
+
+
 const BossContainer = styled.div`
-  border: 2px solid red;
+  background-color: rgba(207, 207, 207, 0.726);
+  ul {
+    display: flex;
+  }
 `;
 
 const Location = () => {
@@ -12,13 +34,11 @@ const Location = () => {
   const [currentLocation, setCurrentLocation] = useState();
   const [bossInfo, setBossInfo] = useState();
 
-  // Use Id's becauase theres a space between map names
   useEffect(() => {
     console.log('In useEffect; current Location: ', currentLocation);
     axios.get(`http://localhost:5000/bosses/${currentLocation}`)
     .then((res) => {
-      console.log(res.data); // console.logs arent working...
-      //find out where is data, set bossInfo, conditional render info
+      console.log(res.data);
       setBossInfo(res.data);
     })
     .catch((err) => {
@@ -32,9 +52,10 @@ const Location = () => {
   }
 
   return (
-    <>
+    <BossWrapper>
+      <h1>Boss Info</h1>
     <form >
-      <label>
+      <label className="map-label">
         Map:
         <select value={currentLocation} onChange={handleChange}>
           <option value="">Select An Area</option>
@@ -61,12 +82,12 @@ const Location = () => {
     </form>
     {bossInfo ? <div>{bossInfo.rows.map((boss, index) => (
       <BossContainer>
-        <li>{boss.name}</li>
-        <div> Location: {boss.location}</div>
-        <div> Items Dropped: {boss.items}</div>
+        <h3>{boss.name}</h3>
+        <ul> Location:<div>{' ' + boss.location}</div></ul>
+        <ul> Items Dropped:<div>{' ' + boss.items}</div></ul>
       </BossContainer>
     ))}</div> : <div>No Boss info</div>}
-    </>
+    </BossWrapper>
   );
 }
 
